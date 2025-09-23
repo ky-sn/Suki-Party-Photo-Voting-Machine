@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Party Photo Contest</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>Party Photo Contest</h1>
+
+  <section id="upload">
+    <h2>Upload Photo</h2>
+    <input type="text" id="alias" placeholder="Your name" />
+    <input type="file" id="photo" accept="image/*" />
+    <button id="uploadBtn">Upload</button>
+  </section>
+
+  <section id="gallery">
+    <h2>Gallery</h2>
+    <div id="photos"></div>
+  </section>
+
+  <section id="vote">
+    <h2>Vote</h2>
+    <p>Voting opens when admin starts it.</p>
+    <div id="voteControls"></div>
+  </section>
+
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+  <script src="script.js"></script>
+</body>
+</html>

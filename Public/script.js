@@ -1,15 +1,29 @@
-// placeholder frontend logic
-// later will connect to Supabase
+const { createClient } = supabase;
+const SUPABASE_URL = "https://ewnglogfpfcpimiuhysc.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV3bmdsb2dmcGZjcGltaXVoeXNjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTg2Mzc3NzcsImV4cCI6MjA3NDIxMzc3N30.fgjnLIYjVEZG67HL1mB2EHuxSXZW2HwFAhspMY0UKas";
+
+const db = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 function init() {
   const uploadBtn = document.getElementById("uploadBtn");
   uploadBtn.addEventListener("click", handleUpload);
 
-  // placeholder: show fake photos
   renderPhotos([
     { id: 1, url: "https://via.placeholder.com/150", uploader: "Alice" },
     { id: 2, url: "https://via.placeholder.com/150", uploader: "Bob" },
   ]);
+}
+
+async function loadPhotos() {
+  let { data, error } = await db
+    .from("photos")
+    .select("*")
+    .eq("approved", true);
+  if (error) {
+    console.error(error);
+    return;
+  }
+  renderPhotos(data);
 }
 
 function handleUpload() {
